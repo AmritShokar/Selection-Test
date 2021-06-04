@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import SubmissionsController from "../controllers/submissions.controller";
+import SubmissionsController from "../controllers/submissionController";
 
 export default class SubmissionsRoute {
     path = process.env.API_VERSION+"/submissions";

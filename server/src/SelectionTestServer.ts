@@ -5,8 +5,8 @@ import createDBConnection from "./lib/DBConnection";
 import { Submission } from "./models/submission";
 import IHttpServer from "./lib/IHttpServer";
 import HttpServer from "./lib/HttpServer";
-import SubmissionsController from "./controllers/submissions.controller";
-import SubmissionsRoute from "./routes/submissions.routes";
+import SubmissionsController from "./controllers/submissionController";
+import SubmissionsRoute from "./routes/submissionRoute";
 
 export default class SelectionTestServer {
     private server: IHttpServer;
