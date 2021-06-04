@@ -1,14 +1,21 @@
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import MissionStatement from './components/MissionStatement';
+import Landing from './components/Landing';
+import Collection from './components/Collection';
 
 function App() {
 
   return (
     <div>
-      
-      <MissionStatement />
+      <Router>
+        <Route exact path="/">
+          <Landing />
+        </Route>
+        <Route path="/collection">
+          <Collection />
+        </Route>
+      </Router>
     </div>
   );
 }
