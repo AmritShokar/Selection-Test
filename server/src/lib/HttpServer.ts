@@ -1,12 +1,14 @@
 import { Application, Router } from "express";
 import * as Http from "http";
 
-export class HttpServer {
+import IHttpServer from "./IHttpServer";
+
+export class HttpServer implements IHttpServer {
     private httpServer: Http.Server;
 
     constructor(private driver: Application) { }
 
-    registerRoute(router: Router): number {
+    register(router: Router): number {
         this.driver.use(router);
         console.log("router added");
         return router.length;
