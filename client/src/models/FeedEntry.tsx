@@ -1,4 +1,5 @@
-export default interface IFeed {
+export default interface IFeedEntry {
+    id: number,
     feedDate: Date,
     country: string,
     city: string,
