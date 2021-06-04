@@ -2,7 +2,7 @@ import { useState, ChangeEvent, FormEvent, FormEventHandler } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Typography, InputAdornment, Button } from '@material-ui/core';
 import { AxiosRequestConfig } from 'axios';
 
-import IFeed from '../models/Feed';
+import IFeed from '../models/FeedEntry';
 import httpClient from '../lib/HttpClient';
 
 interface FormProps {
