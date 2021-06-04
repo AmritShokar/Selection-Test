@@ -1,8 +1,16 @@
 import express from "express";
 
-export class SelectionTestServer {
+export default class SelectionTestServer {
 
     constructor() {
         const driver = express();
+    }
+
+    start(): void {
+
+    }
+
+    stop(): void {
+        
     }
 }
