@@ -5,11 +5,17 @@ import { AxiosRequestConfig } from 'axios';
 import httpClient from '../lib/HttpClient';
 import FeedEntry from '../models/FeedEntry';
 import CollectionItem from './CollectionItem';
+import { flexbox } from '@material-ui/system';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    root: {
+        display: 'flex',
+        justifyContent: 'center'
+    },
     tableContainer: {
-        
+        width: '80vw',
+        marginTop: '5em',
     }
   })
 );
@@ -32,7 +38,7 @@ const Collection = () => {
     }
 
     return (
-        <div>
+        <div className={classes.root}>
             <TableContainer component={Paper} className={classes.tableContainer}>
                 <Table>
                     <TableHead>

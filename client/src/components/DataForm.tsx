@@ -33,16 +33,11 @@ const DataForm = ({ open, toggle }: FormProps) => {
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
         httpClient(requestOptions, onResponse);
-
         toggle();
     }
     
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-        // console.log(e.target.value);
-        // console.log(e.target.id);
-    
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
