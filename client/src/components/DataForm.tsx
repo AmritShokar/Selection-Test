@@ -119,7 +119,7 @@ const DataForm = ({ open, toggle }: FormProps) => {
                     />
 
                     <TextField
-                        name="numberOfDucks"
+                        name="numDucks"
                         type="number"
                         variant="outlined"
                         label="Number of Ducks"
