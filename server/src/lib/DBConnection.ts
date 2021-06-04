@@ -8,7 +8,7 @@ async function createDBConnection(): Promise<Connection | void> {
         port: 3306,
         username: "test",
         password: "test",
-        database: "selectin_test",
+        database: "selection_test",
         entities: [
             Submission
         ],

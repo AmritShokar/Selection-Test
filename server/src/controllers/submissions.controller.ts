@@ -12,9 +12,7 @@ export default class SubmissionsController {
     async postEntry(req: Request, res: Response) {
         console.log("received post request");
 
-        console.log(req.body);
-
-        
+        this.submissionRespository.save(req.body);
 
         res.status(200).send();
     }
