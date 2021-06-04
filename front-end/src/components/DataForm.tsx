@@ -1,40 +1,21 @@
-import FormGroup from '@material-ui/core/FormGroup';
-import Divider from '@material-ui/core/Divider';
+import { ChangeEvent, FormEvent } from 'react';
+import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Typography, InputAdornment, Button } from '@material-ui/core';
 
-import { Dialog, DialogTitle, DialogContent, DialogActions, Typography, makeStyles, createStyles, Theme, InputAdornment, Button } from '@material-ui/core';
-
-import TextField from '@material-ui/core/TextField';
-import { ChangeEvent, FormEvent, FormEventHandler } from 'react';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-        margin: theme.spacing(10)
-    },
-    test: {
-        marginLeft: '2em'
-    },
-    dialogTitle: {
-        fontSize: '100em'
-    }
-  })
-);
 
 const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     console.log("see this submit");
 }
 
 const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-
+    
 }
 
 type FormProps = {
-    open: boolean
+    open: boolean,
+    toggle: () => void
 }
 
-const DataForm = ({ open }: FormProps) => {
-    const classes = useStyles();
-
+const DataForm = ({ open, toggle }: FormProps) => {
     return (
         <Dialog open={open}>
             <DialogTitle disableTypography>
@@ -100,7 +81,7 @@ const DataForm = ({ open }: FormProps) => {
                     />
                     
                     <DialogActions>
-                        <Button variant="contained" color="default">Cancel</Button>
+                        <Button variant="contained" onClick={toggle} color="default">Cancel</Button>
                         <Button variant="contained" color="primary">Submit</Button>
                     </DialogActions>
                 </form>
