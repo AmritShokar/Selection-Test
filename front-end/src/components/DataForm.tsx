@@ -4,10 +4,7 @@ import Divider from '@material-ui/core/Divider';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Typography, makeStyles, createStyles, Theme, InputAdornment, Button } from '@material-ui/core';
 
 import TextField from '@material-ui/core/TextField';
-
-type FormProps = {
-    open: boolean
-}
+import { ChangeEvent, FormEvent, FormEventHandler } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,20 +13,35 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     test: {
         marginLeft: '2em'
+    },
+    dialogTitle: {
+        fontSize: '100em'
     }
   })
 );
+
+const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    console.log("see this submit");
+}
+
+const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+
+}
+
+type FormProps = {
+    open: boolean
+}
 
 const DataForm = ({ open }: FormProps) => {
     const classes = useStyles();
 
     return (
         <Dialog open={open}>
-            <DialogTitle>
-                <Typography variant="h4">Submit Feeding Information</Typography>
+            <DialogTitle disableTypography>
+                <Typography variant="h4">Feeding Information</Typography>
             </DialogTitle>
             <DialogContent>
-                <form>
+                <form onSubmit={onSubmit}>
                     <TextField
                         type="date"
                         variant="outlined"
@@ -88,12 +100,8 @@ const DataForm = ({ open }: FormProps) => {
                     />
                     
                     <DialogActions>
-                        <Button variant="contained" color="default">
-                            Cancel
-                        </Button>
-                        <Button variant="contained" color="primary">
-                            Submit
-                        </Button>
+                        <Button variant="contained" color="default">Cancel</Button>
+                        <Button variant="contained" color="primary">Submit</Button>
                     </DialogActions>
                 </form>
             </DialogContent>
