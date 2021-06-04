@@ -2,11 +2,13 @@ import { Request, Response } from "express";
 
 export default class SubmissionsController {
 
-    constructor() {
+    constructor() { }
 
-    }
+    async postEntry(req: Request, res: Response) {
+        console.log("received post request");
 
-    async postEntry(req: Request, res: Response): Promise<void> {
-        
+        console.log(req.body);
+
+        res.status(200).send();
     }
 }
