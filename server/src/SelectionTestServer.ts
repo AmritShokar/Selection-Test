@@ -2,7 +2,7 @@ import express from "express";
 import { Repository } from "typeorm";
 
 import createDBConnection from "./lib/DBConnection";
-import { Submission } from "./models/submission";
+import { FeedEntry } from "./models/FeedEntry";
 import IHttpServer from "./lib/IHttpServer";
 import HttpServer from "./lib/HttpServer";
 import SubmissionsController from "./controllers/submissionController";
@@ -18,10 +18,10 @@ export default class SelectionTestServer {
 
     async start(): Promise<void> {
         const connection = await createDBConnection();
-        let submissionRepository: Repository<Submission>;
+        let submissionRepository: Repository<FeedEntry>;
 
         if (connection) {
-            submissionRepository = connection.getRepository(Submission);
+            submissionRepository = connection.getRepository(FeedEntry);
         } else {
             throw Error("Failed to connect to database");
         }

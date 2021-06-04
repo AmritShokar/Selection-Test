@@ -1,5 +1,5 @@
 import { createConnection, Connection } from "typeorm";
-import { Submission } from "../models/submission";
+import { FeedEntry } from "../models/FeedEntry";
 
 async function createDBConnection(): Promise<Connection | void> {
     const connection = await createConnection({
@@ -10,7 +10,7 @@ async function createDBConnection(): Promise<Connection | void> {
         password: "test",
         database: "selection_test",
         entities: [
-            Submission
+            FeedEntry
         ],
         synchronize: true,
         logging: false

@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import { Repository } from "typeorm";
-import { Submission } from "../models/Submission";
+import { FeedEntry } from "../models/FeedEntry";
 
 export default class SubmissionsController {
-    submissionRespository: Repository<Submission>
+    submissionRespository: Repository<FeedEntry>
 
-    constructor(submissionRepository: Repository<Submission>) {
+    constructor(submissionRepository: Repository<FeedEntry>) {
         this.submissionRespository = submissionRepository;
     }
 
