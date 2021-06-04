@@ -1,10 +1,7 @@
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
 import FormGroup from '@material-ui/core/FormGroup';
 import Divider from '@material-ui/core/Divider';
 
-import { makeStyles, createStyles, Theme } from '@material-ui/core';
+import { Dialog, DialogTitle, DialogContent, DialogActions, Typography, makeStyles, createStyles, Theme, InputAdornment, Button } from '@material-ui/core';
 
 import TextField from '@material-ui/core/TextField';
 
@@ -29,7 +26,7 @@ const DataForm = ({ open }: FormProps) => {
     return (
         <Dialog open={open}>
             <DialogTitle>
-                Duck Submission Form
+                <Typography variant="h4">Submit Feeding Information</Typography>
             </DialogTitle>
             <DialogContent>
                 <form>
@@ -40,36 +37,64 @@ const DataForm = ({ open }: FormProps) => {
                         InputLabelProps={{ shrink: true }}
                         margin="normal"
                     />
+                    <br/>
+
+                    <TextField
+                        type="text"
+                        variant="outlined"
+                        style={{ marginRight: '1em' }}
+                        label="Country"
+                        margin="normal"
+                    />
+
+                    <TextField
+                        type="text"
+                        variant="outlined"
+                        label="City"
+                        margin="normal"
+                    />
 
                     <TextField
                         fullWidth
                         type="text"
                         variant="outlined"
-                        label="location"
+                        label="Address"
                         margin="normal"
                     />
-                
-                
+                    
                     <TextField
                         type="text"
                         variant="outlined"
-                        label="food type"
+                        style={{ marginRight: '1em' }}
+                        label="Feed Type"
                         margin="normal"
                     />
 
                     <TextField
-                        type="text"
+                        type="number"
                         variant="outlined"
-                        label="amount"
+                        label="Amount of Feed"
+                        InputProps={{
+                            endAdornment: <InputAdornment position="end">g</InputAdornment>,
+                        }}
                         margin="normal"
                     />
 
                     <TextField
-                        type="text"
+                        type="number"
                         variant="outlined"
-                        label="number"
+                        label="Number of Ducks"
                         margin="normal"
                     />
+                    
+                    <DialogActions>
+                        <Button variant="contained" color="default">
+                            Cancel
+                        </Button>
+                        <Button variant="contained" color="primary">
+                            Submit
+                        </Button>
+                    </DialogActions>
                 </form>
             </DialogContent>
         </Dialog>
