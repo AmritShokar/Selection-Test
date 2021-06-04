@@ -14,6 +14,10 @@ export default class SubmissionsRoute {
     }
 
     private addRoutes() {
+        this.router.get(
+            this.path, 
+            this.controller.getEntries.bind(this.controller)
+        );
         this.router.post(
             this.path + "/entry", 
             this.controller.postEntry.bind(this.controller)

@@ -9,11 +9,13 @@ export default class SubmissionsController {
         this.submissionRespository = submissionRepository;
     }
 
+    async getEntries(req: Request, res: Response) {
+        const entries = await this.submissionRespository.find();
+        res.status(200).send(entries);
+    }
+
     async postEntry(req: Request, res: Response) {
-        console.log("received post request");
-
         this.submissionRespository.save(req.body);
-
-        res.status(200).send();
+        res.status(201).send();
     }
 }
