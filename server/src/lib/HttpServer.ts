@@ -1,4 +1,4 @@
-import { Application, Router } from "express";
+import express, { Application, Router } from "express";
 import * as Http from "http";
 import cors from "cors";
 
@@ -9,6 +9,7 @@ export default class HttpServer implements IHttpServer {
 
     constructor(private driver: Application) {
         this.driver.use(cors());
+        this.driver.use(express.json());
     }
 
     register(router: Router): number {
