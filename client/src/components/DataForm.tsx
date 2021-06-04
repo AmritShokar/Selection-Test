@@ -34,8 +34,9 @@ const DataForm = ({ open, toggle }: FormProps) => {
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        //TODO: create a http post request to send to the backend
         httpClient(requestOptions, onResponse);
+
+        toggle();
     }
     
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {

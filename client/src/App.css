@@ -1,1 +1,4 @@
-
+html, body, .app {
+    height: auto;
+    width: auto;
+}
