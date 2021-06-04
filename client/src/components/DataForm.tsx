@@ -12,13 +12,13 @@ interface FormProps {
 
 const DataForm = ({ open, toggle }: FormProps) => {
     const [formData, setFormData] = useState<IFeed>({
-        date: new Date(),
+        feedDate: new Date(),
         country: '',
         city: '',
         address: '',
         feedType: '',
         feedAmount: 0,
-        numberOfDucks: 0
+        numDucks: 0
     });
 
     const requestOptions: AxiosRequestConfig = {
