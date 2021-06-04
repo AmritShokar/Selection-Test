@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const MissionStatement = () => {
+const Landing = () => {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const classes = useStyles();
 
@@ -34,4 +34,4 @@ const MissionStatement = () => {
     )
 }
 
-export default MissionStatement
+export default Landing;
