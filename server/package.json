@@ -4,8 +4,9 @@
   "description": "backend for freshworks selection test",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "mkdir -p build && tsc -b src"
+    "build": "mkdir -p build && tsc -b src",
+    "start": "node build/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Amritpal Shokar",
   "license": "ISC",
