@@ -12,4 +12,12 @@ export class HttpServer {
         console.log("router added");
         return -1
     }
+
+    start(): void {
+
+    }
+
+    stop(): void {
+        
+    }
 }
