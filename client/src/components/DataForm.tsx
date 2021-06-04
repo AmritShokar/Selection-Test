@@ -1,7 +1,9 @@
 import { useState, ChangeEvent, FormEvent, FormEventHandler } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Typography, InputAdornment, Button } from '@material-ui/core';
+import { AxiosRequestConfig } from 'axios';
 
-import IFeed from "../models/Feed";
+import IFeed from '../models/Feed';
+import httpClient from '../lib/HttpClient';
 
 interface FormProps {
     open: boolean,
@@ -11,23 +13,34 @@ interface FormProps {
 const DataForm = ({ open, toggle }: FormProps) => {
     const [formData, setFormData] = useState<IFeed>({
         date: new Date(),
-        country: "",
-        city: "",
-        address: "",
-        feedType: "",
+        country: '',
+        city: '',
+        address: '',
+        feedType: '',
         feedAmount: 0,
         numberOfDucks: 0
     });
+
+    const requestOptions: AxiosRequestConfig = {
+        method: 'POST',
+        url: 'http://localhost:4444/api/v1/submissions/entry',
+        data: formData
+    }
+
+    const onResponse = (data: any) => {
+        console.log(data);
+    };
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         //TODO: create a http post request to send to the backend
+        httpClient(requestOptions, onResponse);
     }
     
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value);
-        console.log(e.target.id);
+        // console.log(e.target.value);
+        // console.log(e.target.id);
     
         setFormData({
             ...formData,
