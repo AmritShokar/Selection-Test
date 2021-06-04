@@ -1,13 +1,9 @@
 export default interface IFeed {
     date: Date,
-    location: ILocation,
+    country: string,
+    city: string,
+    address: string,
     feedType: string,
     feedAmount: number,
     numberOfDucks: number
-}
-
-interface ILocation {
-    country: string,
-    city: string,
-    streetAddress: string
 }
