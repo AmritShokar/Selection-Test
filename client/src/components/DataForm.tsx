@@ -4,6 +4,7 @@ import { AxiosRequestConfig } from 'axios';
 
 import IFeed from '../models/FeedEntry';
 import httpClient from '../lib/HttpClient';
+import { idText } from 'typescript';
 
 interface FormProps {
     open: boolean,
@@ -22,6 +23,10 @@ const DataForm = ({ open, toggle }: FormProps) => {
     };
     const [formData, setFormData] = useState<IFeed>(initialState);
     const [fieldError, setFieldError] = useState('');
+    const [timeStamp, setTimeStamp] = useState({
+        feedDate: '',
+        feedTime: ''
+    });
 
     const requestOptions: AxiosRequestConfig = {
         method: 'POST',
@@ -31,18 +36,50 @@ const DataForm = ({ open, toggle }: FormProps) => {
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        console.log(formData);
+
         httpClient(requestOptions, () => { });
         toggle();
         setFormData(initialState);
     };
     
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setFormData({
-            ...formData,
+        if (e.target.id === 'feedDate' || e.target.id === 'feedTime') {
+            onTimeStampChange(e);
+        } else {
+            setFormData({
+                ...formData,
+                [e.target.id]: e.target.value
+            });
+
+            validate(e.target);
+        }
+    }
+
+    const onTimeStampChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setTimeStamp({
+            ...timeStamp,
             [e.target.id]: e.target.value
         });
 
-        validate(e.target)
+        let newDate: Date;
+        let timeValues: string[];
+        if (e.target.id === 'feedDate') {
+            newDate = new Date(e.target.value);
+            timeValues = timeStamp.feedTime.split(':');
+        } else {
+            newDate = new Date(timeStamp.feedDate);
+            timeValues = e.target.value.split(':');
+        }
+
+        newDate.setHours(parseInt(timeValues[0]), parseInt(timeValues[1]));
+        console.log(newDate);
+
+        setFormData({
+            ...formData,
+            feedDate : newDate
+        });
     }
 
     const validate = (field: EventTarget & HTMLInputElement) => {
@@ -106,10 +143,24 @@ const DataForm = ({ open, toggle }: FormProps) => {
                 <form onSubmit={onSubmit}>
                     <TextField
                         required
-                        id="date"
+                        id="feedDate"
+                        name="feedDate"
                         type="date"
                         variant="outlined"
+                        style={{ marginRight: '1em' }}
                         label="date"
+                        InputLabelProps={{ shrink: true }}
+                        margin="normal"
+                        onChange={onChange}
+                    />
+                    
+                    <TextField
+                        required
+                        id="feedTime"
+                        name="feedTime"
+                        type="time"
+                        variant="outlined"
+                        label="time"
                         InputLabelProps={{ shrink: true }}
                         margin="normal"
                         onChange={onChange}
