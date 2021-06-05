@@ -12,5 +12,4 @@ test('form data fields exist', () => {
     getByLabelText("feedType");
     getByLabelText("feedAmount");
     getByLabelText("numDucks");
-
 });
