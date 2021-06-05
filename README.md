@@ -2,6 +2,9 @@
 
 Code base for the Freshworks full stack developer selection test. This code base contains both the client and the server.
 
+#### The data entries table is accessed by the following url: ####
+##### http://localhost:3000/collection #####
+
 ### Prerequisites
 - - - -
 - MySQL (~5.7) port: 3306
@@ -56,6 +59,8 @@ Start Server:
 Start Client:
     * run client:
         `npm start`
+    * if the application does not open, use the following url:
+        `http://localhost:3000`
 
 
 
