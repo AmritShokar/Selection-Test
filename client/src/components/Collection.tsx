@@ -26,7 +26,7 @@ const Collection = () => {
     useEffect(() => {
         const requestOptions: AxiosRequestConfig = {
             method: 'GET',
-            url: 'http://localhost:4444/api/v1/submissions'
+            url: process.env.REACT_APP_SERVER_URL + '/submissions'
         }
         
         httpClient(requestOptions, response);
@@ -42,8 +42,9 @@ const Collection = () => {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>ID</TableCell>
+                            <TableCell align="right">ID</TableCell>
                             <TableCell align="right">Date</TableCell>
+                            <TableCell align="right">Time</TableCell>
                             <TableCell align="right">Country</TableCell>
                             <TableCell align="right">City</TableCell>
                             <TableCell align="right">Address</TableCell>
@@ -55,7 +56,7 @@ const Collection = () => {
 
                     <TableBody>
                         {feedEntries.map((entry) => {
-                            return <CollectionItem entry={entry}/>
+                            return <CollectionItem key={entry.id} entry={entry}/>
                         })}
                     </TableBody>
                 </Table>

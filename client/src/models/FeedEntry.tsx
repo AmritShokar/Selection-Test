@@ -1,5 +1,5 @@
 export default interface IFeedEntry {
-    id?: number,
+    id: number,
     feedDate: Date,
     country: string,
     city: string,

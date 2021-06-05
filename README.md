@@ -1,6 +1,6 @@
 # Freshworks Studio Fulll Stack Selection Test
 
-This code base contains both the client and the server
+Code base for the Freshworks full stack developer selection test. This code base contains both the client and the server.
 
 ### Prerequisites
 - - - -
@@ -34,24 +34,25 @@ Server Environment Setup:
 
 ### Run Tests
 - - - -
-
 Client Tests:
-    * run tests:
+    1. launch test runner:
         `npm test`
+    2. run all tests by selecting the 'a' key
+
 Server Tests:
-    * build tests:
+    1. build tests:
         `npm run build-test`
-    * run tests:
+    2. run tests:
         `npm test`
 
 ### Start Application In Local Environment
 - - - -
-
 Start Server:
     * build server:
         `npm run build`
     * run server:
         `npm run start`
+
 Start Client:
     * run client:
         `npm start`

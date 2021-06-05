@@ -4,7 +4,6 @@ import { AxiosRequestConfig } from 'axios';
 
 import IFeed from '../models/FeedEntry';
 import httpClient from '../lib/HttpClient';
-import { idText } from 'typescript';
 
 interface FormProps {
     open: boolean,
@@ -13,6 +12,7 @@ interface FormProps {
 
 const DataForm = ({ open, toggle }: FormProps) => {
     const initialState: IFeed = {
+        id: 0,
         feedDate: new Date(),
         country: '',
         city: '',
@@ -30,15 +30,12 @@ const DataForm = ({ open, toggle }: FormProps) => {
 
     const requestOptions: AxiosRequestConfig = {
         method: 'POST',
-        url: 'http://localhost:4444/api/v1/submissions/entry',
+        url: process.env.REACT_APP_SERVER_URL + '/submissions/entry',
         data: formData
     };
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
-        console.log(formData);
-
         httpClient(requestOptions, () => { });
         toggle();
         setFormData(initialState);
@@ -74,8 +71,6 @@ const DataForm = ({ open, toggle }: FormProps) => {
         }
 
         newDate.setHours(parseInt(timeValues[0]), parseInt(timeValues[1]));
-        console.log(newDate);
-
         setFormData({
             ...formData,
             feedDate : newDate
