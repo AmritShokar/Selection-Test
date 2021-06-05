@@ -21,6 +21,7 @@ const DataForm = ({ open, toggle }: FormProps) => {
         numDucks: 0
     };
     const [formData, setFormData] = useState<IFeed>(initialState);
+    const [fieldError, setFieldError] = useState('');
 
     const requestOptions: AxiosRequestConfig = {
         method: 'POST',
@@ -40,7 +41,60 @@ const DataForm = ({ open, toggle }: FormProps) => {
             ...formData,
             [e.target.id]: e.target.value
         });
-    };
+
+        validate(e.target)
+    }
+
+    const validate = (field: EventTarget & HTMLInputElement) => {
+        setFieldError('');
+        const { id, value } = field;
+        
+        switch(id) {
+            case 'country':
+                if(value.length > 50) {
+                    setFieldError('country must be under 50 characters');
+                } else if (value.length < 2) {
+                    setFieldError('country must have at least 2 characters');
+                }
+                break;
+            case 'city':
+                if(value.length > 50) {
+                    setFieldError('city must be under 50 characters');
+                } else if (value.length < 2) {
+                    setFieldError('city must have at least 2 characters');
+                }
+                break;
+            case 'address':
+                if(value.length > 50) {
+                    setFieldError('address must be under 50 characters');
+                } else if (value.length < 2) {
+                    setFieldError('address must have at least 2 characters');
+                }
+                break;
+            case 'feedType':
+                if(value.length > 30) {
+                    setFieldError('feed type must be under 30 characters');
+                } else if (value.length < 2) {
+                    setFieldError('feed type must have at least 2 characters');
+                }
+                break;
+            case 'feedAmount':
+                if(parseInt(value) > 999999) {
+                    setFieldError('feed amount must be under 999999 g');
+                } else if (parseInt(value) < 1) {
+                    setFieldError('feed amount be at least 1 g');
+                }
+                break;
+            case 'numDucks':
+                if(parseInt(value) > 999) {
+                    setFieldError('number of ducks must be under 999');
+                } else if (parseInt(value) < 1) {
+                    setFieldError('must have fed at least one duck');
+                }
+                break;
+            default:
+        }
+    }
 
     return (
         <Dialog open={open}>
@@ -48,8 +102,10 @@ const DataForm = ({ open, toggle }: FormProps) => {
                 <Typography variant="h4">Feeding Information</Typography>
             </DialogTitle>
             <DialogContent>
+                {fieldError ? (<Typography variant="body1" color="error">{ fieldError }</Typography>) : <br/>}
                 <form onSubmit={onSubmit}>
                     <TextField
+                        required
                         id="date"
                         type="date"
                         variant="outlined"
@@ -61,6 +117,7 @@ const DataForm = ({ open, toggle }: FormProps) => {
                     <br/>
 
                     <TextField
+                        required
                         id="country"
                         type="text"
                         variant="outlined"
@@ -71,6 +128,7 @@ const DataForm = ({ open, toggle }: FormProps) => {
                     />
 
                     <TextField
+                        required
                         id="city"
                         type="text"
                         variant="outlined"
@@ -80,6 +138,7 @@ const DataForm = ({ open, toggle }: FormProps) => {
                     />
 
                     <TextField
+                        required
                         id="address"
                         fullWidth
                         type="text"
@@ -90,6 +149,7 @@ const DataForm = ({ open, toggle }: FormProps) => {
                     />
                     
                     <TextField
+                        required
                         id="feedType"
                         type="text"
                         variant="outlined"
@@ -100,6 +160,7 @@ const DataForm = ({ open, toggle }: FormProps) => {
                     />
 
                     <TextField
+                        required
                         id="feedAmount"
                         type="number"
                         variant="outlined"
@@ -112,6 +173,7 @@ const DataForm = ({ open, toggle }: FormProps) => {
                     />
 
                     <TextField
+                        required
                         id="numDucks"
                         type="number"
                         variant="outlined"
@@ -121,8 +183,20 @@ const DataForm = ({ open, toggle }: FormProps) => {
                     />
                     
                     <DialogActions>
-                        <Button variant="contained" onClick={() => { toggle(); setFormData(initialState); }} color="default">Cancel</Button>
-                        <Button type="submit" variant="contained" color="primary">Submit</Button>
+                        <Button 
+                            variant="contained" 
+                            onClick={() => { toggle(); setFormData(initialState); }} 
+                            color="default">
+                                Cancel
+                        </Button>
+
+                        <Button 
+                            type="submit" 
+                            variant="contained" 
+                            color="primary"
+                            disabled={fieldError === '' ? false : true}>
+                                Submit
+                        </Button>
                     </DialogActions>
                 </form>
             </DialogContent>
