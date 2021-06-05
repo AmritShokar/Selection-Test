@@ -8,7 +8,7 @@ import landing from '../res/duck-landing-image.jpg';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     background: {
-        height: '60vh',
+        height: '70vh',
         backgroundImage: `url(${landing})`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
