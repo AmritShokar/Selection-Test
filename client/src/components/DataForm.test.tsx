@@ -3,13 +3,13 @@ import { render } from '@testing-library/react';
 import DataForm from './DataForm';
 
 test('form data fields exist', () => {
-    const { getByLabelText } = render(<DataForm open={true} toggle={() => { }}/>);
+    const { getByText } = render(<DataForm open={true} toggle={() => { }}/>);
 
-    getByLabelText("date");
-    getByLabelText("country");
-    getByLabelText("city");
-    getByLabelText("address");
-    getByLabelText("feedType");
-    getByLabelText("feedAmount");
-    getByLabelText("numDucks");
+    getByText("date");
+    getByText("country");
+    getByText("city");
+    getByText("address");
+    getByText("feedType");
+    getByText("feedAmount");
+    getByText("numDucks");
 });
