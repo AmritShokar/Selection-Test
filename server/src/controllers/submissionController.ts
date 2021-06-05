@@ -10,12 +10,22 @@ export default class SubmissionsController {
     }
 
     async getEntries(req: Request, res: Response) {
-        const entries = await this.submissionRespository.find();
-        res.status(200).send(entries);
+        await this.submissionRespository.find()
+            .then((entries) => {
+                res.status(200).send(entries);
+            })
+            .catch((error) => {
+                res.status(500).send(error);
+            });
     }
 
     async postEntry(req: Request, res: Response) {
-        this.submissionRespository.save(req.body);
-        res.status(201).send();
+        await this.submissionRespository.save(req.body)
+            .then(() => {
+                res.status(201).send();
+            })
+            .catch((error) => {
+                res.status(500).send(error);
+            });
     }
 }
