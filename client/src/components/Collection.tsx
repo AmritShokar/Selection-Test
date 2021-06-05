@@ -5,7 +5,6 @@ import { AxiosRequestConfig } from 'axios';
 import httpClient from '../lib/HttpClient';
 import FeedEntry from '../models/FeedEntry';
 import CollectionItem from './CollectionItem';
-import { flexbox } from '@material-ui/system';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,17 +22,17 @@ const useStyles = makeStyles((theme: Theme) =>
 const Collection = () => {
     const classes = useStyles();
     const [feedEntries, setFeedEntries] = useState<FeedEntry[]>([]);
-    const requestOptions: AxiosRequestConfig = {
-        method: 'GET',
-        url: 'http://localhost:4444/api/v1/submissions'
-    }
 
     useEffect(() => {
+        const requestOptions: AxiosRequestConfig = {
+            method: 'GET',
+            url: 'http://localhost:4444/api/v1/submissions'
+        }
+        
         httpClient(requestOptions, response);
     }, []);
 
     const response = (entries: FeedEntry[]) => {
-        console.log(entries);
         setFeedEntries([...entries]);
     }
 

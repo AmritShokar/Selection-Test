@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FormEvent, FormEventHandler } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Typography, InputAdornment, Button } from '@material-ui/core';
 import { AxiosRequestConfig } from 'axios';
 
@@ -27,13 +27,9 @@ const DataForm = ({ open, toggle }: FormProps) => {
         data: formData
     }
 
-    const onResponse = (data: any) => {
-        console.log(data);
-    };
-
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        httpClient(requestOptions, onResponse);
+        httpClient(requestOptions, () => { });
         toggle();
     }
     
