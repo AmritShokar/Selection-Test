@@ -11,7 +11,7 @@ interface FormProps {
 }
 
 const DataForm = ({ open, toggle }: FormProps) => {
-    const [formData, setFormData] = useState<IFeed>({
+    const initialState: IFeed = {
         feedDate: new Date(),
         country: '',
         city: '',
@@ -19,26 +19,28 @@ const DataForm = ({ open, toggle }: FormProps) => {
         feedType: '',
         feedAmount: 0,
         numDucks: 0
-    });
+    };
+    const [formData, setFormData] = useState<IFeed>(initialState);
 
     const requestOptions: AxiosRequestConfig = {
         method: 'POST',
         url: 'http://localhost:4444/api/v1/submissions/entry',
         data: formData
-    }
+    };
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         httpClient(requestOptions, () => { });
         toggle();
-    }
+        setFormData(initialState);
+    };
     
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,
             [e.target.id]: e.target.value
         });
-    }
+    };
 
     return (
         <Dialog open={open}>
@@ -85,7 +87,6 @@ const DataForm = ({ open, toggle }: FormProps) => {
                         label="address"
                         margin="normal"
                         onChange={onChange}
-                        value="tea"
                     />
                     
                     <TextField
@@ -120,7 +121,7 @@ const DataForm = ({ open, toggle }: FormProps) => {
                     />
                     
                     <DialogActions>
-                        <Button variant="contained" onClick={toggle} color="default">Cancel</Button>
+                        <Button variant="contained" onClick={() => { toggle(); setFormData(initialState); }} color="default">Cancel</Button>
                         <Button type="submit" variant="contained" color="primary">Submit</Button>
                     </DialogActions>
                 </form>
