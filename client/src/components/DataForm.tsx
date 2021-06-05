@@ -40,7 +40,7 @@ const DataForm = ({ open, toggle }: FormProps) => {
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value
+            [e.target.id]: e.target.value
         });
     }
 
@@ -52,10 +52,10 @@ const DataForm = ({ open, toggle }: FormProps) => {
             <DialogContent>
                 <form onSubmit={onSubmit}>
                     <TextField
-                        name="date"
+                        id="date"
                         type="date"
                         variant="outlined"
-                        label="Date"
+                        label="date"
                         InputLabelProps={{ shrink: true }}
                         margin="normal"
                         onChange={onChange}
@@ -63,49 +63,50 @@ const DataForm = ({ open, toggle }: FormProps) => {
                     <br/>
 
                     <TextField
-                        name="country"
+                        id="country"
                         type="text"
                         variant="outlined"
                         style={{ marginRight: '1em' }}
-                        label="Country"
+                        label="country"
                         margin="normal"
                         onChange={onChange}
                     />
 
                     <TextField
-                        name="city"
+                        id="city"
                         type="text"
                         variant="outlined"
-                        label="City"
+                        label="city"
                         margin="normal"
                         onChange={onChange}
                     />
 
                     <TextField
-                        name="address"
+                        id="address"
                         fullWidth
                         type="text"
                         variant="outlined"
-                        label="Address"
+                        label="address"
                         margin="normal"
                         onChange={onChange}
+                        value="tea"
                     />
                     
                     <TextField
-                        name="feedType"
+                        id="feedType"
                         type="text"
                         variant="outlined"
                         style={{ marginRight: '1em' }}
-                        label="Feed Type"
+                        label="feedType"
                         margin="normal"
                         onChange={onChange}
                     />
 
                     <TextField
-                        name="feedAmount"
+                        id="feedAmount"
                         type="number"
                         variant="outlined"
-                        label="Amount of Feed"
+                        label="feedAmount"
                         InputProps={{
                             endAdornment: <InputAdornment position="end">g</InputAdornment>,
                         }}
@@ -114,10 +115,10 @@ const DataForm = ({ open, toggle }: FormProps) => {
                     />
 
                     <TextField
-                        name="numDucks"
+                        id="numDucks"
                         type="number"
                         variant="outlined"
-                        label="Number of Ducks"
+                        label="numDucks"
                         margin="normal"
                         onChange={onChange}
                     />
