@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper, makeStyles, createStyles, Theme } from '@material-ui/core';
 import { AxiosRequestConfig } from 'axios';
+import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, TablePagination, Paper, makeStyles, createStyles, Theme } from '@material-ui/core';
 
 import httpClient from '../lib/HttpClient';
 import FeedEntry from '../models/FeedEntry';
@@ -22,6 +22,8 @@ const useStyles = makeStyles((theme: Theme) =>
 const Collection = () => {
     const classes = useStyles();
     const [feedEntries, setFeedEntries] = useState<FeedEntry[]>([]);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
 
     useEffect(() => {
         const requestOptions: AxiosRequestConfig = {
@@ -35,6 +37,15 @@ const Collection = () => {
     const response = (entries: FeedEntry[]) => {
         setFeedEntries([...entries]);
     }
+
+    const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+        setPage(newPage);
+    };
+    
+    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
 
     return (
         <div className={classes.root}>
@@ -55,11 +66,22 @@ const Collection = () => {
                     </TableHead>
 
                     <TableBody>
-                        {feedEntries.map((entry) => {
-                            return <CollectionItem key={entry.id} entry={entry}/>
-                        })}
+                        {feedEntries.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            .map((entry) => {
+                                return <CollectionItem key={entry.id} entry={entry}/>
+                            })}
                     </TableBody>
                 </Table>
+
+                <TablePagination
+                component="div"
+                count={feedEntries.length}
+                page={page}
+                onChangePage={handleChangePage}
+                rowsPerPage={rowsPerPage}
+                rowsPerPageOptions={[10,15,25]}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
             </TableContainer>
         </div>
     )
