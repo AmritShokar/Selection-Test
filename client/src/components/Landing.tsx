@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Grid, Button, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Box, Grid, Button, createStyles, makeStyles, Theme, Typography, Snackbar } from '@material-ui/core';
 
 import DataForm from './DataForm';
 
@@ -36,10 +36,18 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Landing = () => {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [isSuccessMsgOpen, setIsSuccessMsgOpen] = useState(false);
     const classes = useStyles();
 
-    const toggleDialog = () => {
+    const toggleDialog = (success: boolean) => {
         setIsDialogOpen(!isDialogOpen);
+        if (success) {
+            setIsSuccessMsgOpen(true);
+        }
+    }
+
+    const onCloseSuccessMessage = () => {
+        setIsSuccessMsgOpen(false);
     }
 
     return (
@@ -48,13 +56,27 @@ const Landing = () => {
                 <Grid item xs={12}>
                     <Typography variant="h2" className={classes.heading}>We need your help!</Typography>
                 </Grid>
+
                 <Grid item xs={12}>
                     <Typography variant="h5" className={classes.subHeading}>
                         Take a minute to help us better understand how ducks are fed
                     </Typography>
                 </Grid>
-                <Button variant="contained" className={classes.formButton} onClick={() => { setIsDialogOpen(!isDialogOpen) }}>Help Us Out!</Button>
+
+                <Button 
+                    variant="contained" 
+                    className={classes.formButton} 
+                    onClick={() => { setIsDialogOpen(!isDialogOpen) }}>
+                        Help Us Out!
+                </Button>
+
                 <DataForm open={isDialogOpen} toggle={toggleDialog}/>
+                <Snackbar 
+                    open={isSuccessMsgOpen}
+                    anchorOrigin={{'vertical': 'top', 'horizontal': 'right'}}
+                    message="Form submitted. Thank you!"
+                    onClose={onCloseSuccessMessage}
+                    autoHideDuration={5000}/>
             </Grid>
         </Box>
     )

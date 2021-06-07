@@ -34,7 +34,7 @@ const Collection = () => {
         httpClient(requestOptions, response);
     }, []);
 
-    const response = (entries: FeedEntry[]) => {
+    const response = (status: number, entries: FeedEntry[]) => {
         setFeedEntries([...entries]);
     }
 

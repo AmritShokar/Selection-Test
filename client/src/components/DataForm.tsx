@@ -7,7 +7,7 @@ import httpClient from '../lib/HttpClient';
 
 interface FormProps {
     open: boolean,
-    toggle: () => void
+    toggle: (success: boolean) => void
 }
 
 const DataForm = ({ open, toggle }: FormProps) => {
@@ -36,9 +36,13 @@ const DataForm = ({ open, toggle }: FormProps) => {
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        httpClient(requestOptions, () => { });
-        toggle();
-        setFormData(initialState);
+        httpClient(requestOptions, (status: number, response: any) => {
+            if (status === 201) {
+                toggle(true);
+                setFormData(initialState);
+            }
+        });
+        
     };
     
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -231,7 +235,7 @@ const DataForm = ({ open, toggle }: FormProps) => {
                     <DialogActions>
                         <Button 
                             variant="contained" 
-                            onClick={() => { toggle(); setFormData(initialState); }} 
+                            onClick={() => { toggle(false); setFormData(initialState); }} 
                             color="default">
                                 Cancel
                         </Button>
