@@ -6,6 +6,7 @@ test('form data fields exist', () => {
     const { getByText } = render(<DataForm open={true} toggle={() => { }}/>);
 
     getByText("date");
+    getByText("time");
     getByText("country");
     getByText("city");
     getByText("address");
