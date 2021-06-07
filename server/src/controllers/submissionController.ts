@@ -10,7 +10,11 @@ export default class SubmissionsController {
     }
 
     async getEntries(req: Request, res: Response) {
-        await this.submissionRespository.find()
+        await this.submissionRespository.find({
+                order: {
+                    id: 'DESC'
+                }
+            })
             .then((entries) => {
                 res.status(200).send(entries);
             })
